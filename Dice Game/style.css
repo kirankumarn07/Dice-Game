@@ -1,0 +1,122 @@
+/** @format */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --dark-green: #008000;
+  --light-green: #04c52e;
+  --gray: #808080;
+  --baby-pink: #ff9090;
+}
+
+body {
+  font-family: "calibri", sans-serif;
+  background-color: #f2f2f2;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+  margin-top: 100px;
+}
+.container > h1 {
+  color: black;
+  font-size: 36px;
+  margin-bottom: 100px;
+  margin-top: 80px;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.player-one,
+.player-two {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+}
+
+button {
+  border: none;
+  color: white;
+  background-color: green;
+  padding: 10px;
+  cursor: pointer;
+  width: auto;
+  border-radius: 2px;
+  margin-top: 15x;
+}
+
+.btn-color {
+  background-color: gray;
+}
+
+.container > button {
+  background-color: pink;
+}
+
+.dices-images {
+  margin-bottom: 1rem;
+}
+
+span {
+  font-size: 50px;
+  font-weight: 700;
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 758px) {
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .player-one,
+  .player-two {
+    margin: 1rem 0;
+  }
+}
+
+/* Add this to your CSS file or style section */
+@keyframes winnerScale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes winnerColorChange {
+  0% {
+    color: inherit;
+  }
+  50% {
+    color: #04c52e; /* Change to the color you prefer */
+  }
+  100% {
+    color: inherit;
+  }
+}
+
+.winner {
+  animation: winnerScale 1s ease-in-out infinite,
+    winnerColorChange 2s ease-in-out infinite;
+  transform-origin: center;
+}
