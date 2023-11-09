@@ -1,19 +1,35 @@
+/** @format */
+
+// todo Selecting the function buttons
 const player1Btn = document.querySelector(".btn-1");
 const player2Btn = document.querySelector(".btn-2");
 const restBtn = document.querySelector(".restBtn");
+
+// todo Selecting the DOM elements where changes to be applied
 const dicesImages = document.querySelector(".dices-images");
-const player1Value = document.querySelector(".value-one");
-const player2Value = document.querySelector(".value-two");
-const Text = document.querySelector(".Text");
-const images = ["./images/value-one-dice.png", "./images/value-two-dice.png","./images/value-three-dice.png",
-  "./images/value-four-dice.png", "./images/value-five-dice.png",  "./images/value-six-dice.png",
+const player1Value = document.querySelector(".value-1");
+const player2Value = document.querySelector(".value-2");
+const h1Text = document.querySelector(".h1Text");
+
+// todo Array of dice images
+const images = [
+  "./img/value-one-dice.png",
+  "./img/value-two-dice.png",
+  "./img/value-three-dice.png",
+  "./img/value-four-dice.png",
+  "./img/value-five-dice.png",
+  "./img/value-six-dice.png",
 ];
+
+// ? winner score
 const winnerScore = 30;
+// ? Initial player value = 0;
 let player1Score = 0;
 let player2Score = 0;
 
+// ! Function to set a default image
 const setDefaultImage = () => {
-  const img = document.createElement("images");
+  const img = document.createElement("img");
   img.setAttribute("src", images[0]);
   dicesImages.innerHTML = "";
   dicesImages.appendChild(img);
@@ -21,17 +37,18 @@ const setDefaultImage = () => {
   player2Value.textContent = 0;
   player1Score = 0;
   player2Score = 0;
-  Text.textContent = "Let’s play dices game";
-  Text.classList.remove("winner");
+  h1Text.textContent = "Let’s  play Dice game";
+  h1Text.classList.remove("winner");
 
+  // ? change color button
   player1Btn.classList.remove("btn-color");
   player2Btn.classList.remove("btn-color");
   player1Btn.disabled = false;
   player2Btn.disabled = false;
 };
 
-//Functions for handle
-const Dice1 = () => {
+// ! Function to handle player button 1
+const rollDice1 = () => {
   const randomNum = Math.floor(Math.random() * images.length);
   const img = document.createElement("img");
   img.setAttribute("src", images[randomNum]);
@@ -40,24 +57,30 @@ const Dice1 = () => {
   let printvalue1 = randomNum + 1;
   player1Score += printvalue1;
   if (player1Score >= winnerScore) {
-    Text.textContent =
-      "Winner Congratulations Player 1!";
-    Text.classList.add("winner");
+    h1Text.textContent =
+      " Congratulations Player-1 winner";
+    h1Text.classList.add("winner");
     player1Value.textContent = player1Score;
+
+    // ? disable both player btn
     player1Btn.disabled = true;
     player2Btn.disabled = true;
   } else {
     player1Value.textContent = player1Score;
-    Text.textContent = "player-2 to play";
+    h1Text.textContent = "player-2 to play";
+
+    // ? change color button
     player2Btn.classList.remove("btn-color");
     player1Btn.classList.add("btn-color");
+
+    // ? disable one button
     player1Btn.disabled = true;
     player2Btn.disabled = false;
   }
 };
 
 // ! Function to handle player button 2
-const Dice2 = () => {
+const rollDice2 = () => {
   const randomNum = Math.floor(Math.random() * images.length);
   const img = document.createElement("img");
   img.setAttribute("src", images[randomNum]);
@@ -66,9 +89,9 @@ const Dice2 = () => {
   let printvalue2 = randomNum + 1;
   player2Score += printvalue2;
   if (player2Score >= winnerScore) {
-    Text.textContent =
-      "Winner Congratulations Player 2";
-    Text.classList.add("winner");
+    h1Text.textContent =
+      "Congratulations Player-2 winner";
+    h1Text.classList.add("winner");
     player2Value.textContent = player2Score;
 
     // ? disable both player btn
@@ -76,13 +99,19 @@ const Dice2 = () => {
     player2Btn.disabled = true;
   } else {
     player2Value.textContent = player2Score;
-    Text.textContent = "Player-1 to play";
+    h1Text.textContent = "Player-1 to play";
+
+    // ? change color button
     player1Btn.classList.remove("btn-color");
     player2Btn.classList.add("btn-color");
+
+    // ? disable one button
     player1Btn.disabled = false;
     player2Btn.disabled = true;
   }
 };
-player1Btn.addEventListener("click", Dice1);
-player2Btn.addEventListener("click", Dice2);
+
+// todoAdding event listeners to the buttons
+player1Btn.addEventListener("click", rollDice1);
+player2Btn.addEventListener("click", rollDice2);
 restBtn.addEventListener("click", setDefaultImage);
